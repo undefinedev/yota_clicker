@@ -25,13 +25,13 @@ bump_date () {
 }
 
 click_resume () {
-  AUTH_URL="https://hi.yota.ru/wa/v1/auth/authDeviceByIp"
+  AUTH_URL="https://hi.yota.ru/modem-bpa/v1/auth/authDeviceByIp"
   HDRS="-H Content-Type:application/json"
   TOKEN=$(curl $AUTH_URL $HDRS -s | sed -n 's/.*"access_token":"\([^"]*\)".*/\1/p')
 
   CODE=$1
-  CLICK_URL="https://hi.yota.ru/wa/v1/service/temp"
-  AGENT='Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.110 Safari/537.36'
+  CLICK_URL="https://hi.yota.ru/modem-bpa/v1/service/temp"
+  AGENT='Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36'
   HDRS=$HDRS" -H 'Authorization: Bearer "$TOKEN"' -A \"$AGENT\""
   cmd="curl $CLICK_URL $HDRS --data-raw '{\"serviceCode\":\"$CODE\"}'"
 
